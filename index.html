@@ -140,15 +140,20 @@
     <div class="section" id="research">
       <h2>Research & Papers</h2>
 
-      <div class="project">
-        <div class="proj-header">
-          <div class="proj-left">
-            <span class="proj-name">Example Research Paper Title</span>
+      <div class="paper-card">
+        <div class="paper-info">
+          <div class="paper-header">
+            <span class="paper-type">Research Paper</span>
+            <span class="paper-date">2024</span>
           </div>
-          <span class="proj-lang">Journal / Conference Name</span>
+          <h3 class="paper-title">Optimizing High-Altitude Logistics through AI-Driven Predictive Modeling</h3>
+          <p class="paper-abstract">An exploration into how machine learning can revolutionize trekking logistics in the
+            Himalayas, predicting weather patterns and resource requirements for safer expeditions.</p>
+          <div class="paper-actions">
+            <button class="read-btn" onclick="openReader('assets/research-paper.pdf')">Read Paper</button>
+            <a href="assets/GuardNet Final Research Paper.pdf" download class="download-link">Download PDF</a>
+          </div>
         </div>
-        <p class="proj-desc">Brief abstract or summary of the research findings and your contribution. This could cover AI, web architecture, or trekking logistics.</p>
-        <a href="#" class="proj-link">Read Full Paper ↗</a>
       </div>
     </div>
 
@@ -212,6 +217,18 @@
       <span>Nepal 🇳🇵</span>
     </footer>
 
+    <!-- READER OVERLAY -->
+    <div id="reader-overlay" class="reader-overlay">
+      <div class="reader-header">
+        <span class="reader-title">Reading Mode</span>
+        <button class="close-reader" onclick="closeReader()">&times;</button>
+      </div>
+      <div class="reader-container">
+        <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <script src="reader.js"></script>
 </body>
 
 </html>
