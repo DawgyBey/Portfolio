@@ -4,229 +4,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sulav Nepal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>Sulav Nepal — Student &amp; Aspiring Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="bg-noise"></div>
 
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="monogram" id="monogram-logo">SN<span class="dot"></span></div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#work">Work</a>
+        <a href="#papers">Papers</a>
+        <a href="#github">Github</a>
+        <a href="#hire">Hire me</a>
+        <button id="edit-toggle" type="button">Edit</button>
+      </nav>
+    </div>
+  </header>
 
-  <!-- NAV -->
-  <nav>
-    <span class="nav-name">Sulav Nepal</span>
-    <ul>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#research">research</a></li>
-      <li><a href="#stack">stack</a></li>
-      <li><a href="#about">about</a></li>
-      <li><a href="https://github.com/DawgyBey" target="_blank">github ↗</a></li>
-    </ul>
-  </nav>
+  <section class="hero">
+    <div class="hero-topbar"></div>
+    <div class="masthead-vert" id="hero-masthead">The Builders — Class Of 2026</div>
+    <div class="hero-portrait">
+      <img src="55a8b86d-6481-4d09-983c-b17269375ae8.png" alt="Portrait">
+    </div>
+    <div class="hero-name-block">
+      <h1 id="hero-name"><span class="first-name">Sulav</span> <span class="last-name">Nepal</span></h1>
+      <div class="role" id="hero-role">Student &amp; Aspiring Software Developer (Class of 2026) <em></em></div>
+    </div>
+    <div class="seal"><span class="dot"></span><span>Verified profile</span></div>
+  </section>
 
-  <!-- HERO -->
-  <div class="hero-band">
-    <div class="hero-inner">
+  <section class="section" id="about">
+    <div class="wrap about-grid">
       <div>
-        <div class="status">
-          Building in public · Available for collab
+        <p class="eyebrow">01 — About</p>
+        <p class="lede" id="about-lede">Aspiring <span class="signal-text">software developer</span> focused on building clean web
+          applications and learning data science.</p>
+      </div>
+      <div class="about-copy">
+        <div id="about-bio">
+          <p>I am a passionate computer science student who started coding with basic programming concepts and quickly
+            fell in love with software development. I enjoy building functional websites and exploring data analysis
+            libraries.</p>
+          <p>Currently pursuing my degree, I am focused on mastering core software engineering practices, learning Python,
+            and collaborating on academic and open-source projects to solve real-world problems.</p>
         </div>
-        <div class="hero-name">Sulav Nepal</div>
-        <div class="hero-handle">@DawgyBey</div>
-        <p class="hero-bio">
-          Full-stack developer crafting intelligent bots, AI applications, and scalable web experiences.
-          From my early days of learning via school projects to building sophisticated platforms like
-          <strong>Incanto</strong>,
-          I’ve traded exposed API keys for robust architecture and secure code.
-          Currently balancing technical growth with management at <a href="https://www.eternalhimalaya.com"
-            target="_blank"><em>Eternal Himalaya</em></a>.
-        </p>
-        <div class="hero-links">
-          <a href="https://github.com/DawgyBey" target="_blank">View GitHub ↗</a>
-          <a href="#projects">Explore My Work</a>
-        </div>
-      </div>
-      <div>
-        <img src="https://avatars.githubusercontent.com/u/215866951?v=4" alt="Sulav Nepal" class="hero-photo"
-          onerror="this.outerHTML='<div class=hero-photo-fallback>SN</div>'" />
-      </div>
-    </div>
-  </div>
-
-  <!-- PROJECTS -->
-  <div class="section" id="projects">
-    <h2>Projects</h2>
-
-    <div class="project">
-      <div class="proj-header">
-        <div class="proj-left">
-          <span class="proj-name">Incanto</span>
-        </div>
-        <span class="proj-lang">JS · React · Node.js</span>
-      </div>
-      <p class="proj-desc">A sophisticated AI-powered gift and product discovery platform. Features a React-based
-        frontend and a Node.js/Express backend with Google OAuth integration for personalized user experiences.</p>
-      <a href="https://github.com/DawgyBey/Incanto" target="_blank" class="proj-link">github.com/DawgyBey/Incanto ↗</a>
-      <div class="proj-tags">
-        <span class="proj-tag">React</span>
-        <span class="proj-tag">Node.js</span>
-        <span class="proj-tag">Express</span>
-        <span class="proj-tag">Google OAuth</span>
-        <span class="proj-tag">OpenAI API</span>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="proj-header">
-        <div class="proj-left">
-          <span class="proj-name">WeatherBot</span>
-        </div>
-        <span class="proj-lang">JavaScript</span>
-      </div>
-      <p class="proj-desc">A real-time weather data application that fetches and processes environmental data via
-        third-party APIs. My first venture into asynchronous JavaScript and API management.</p>
-      <a href="https://github.com/DawgyBey/WeatherBot" target="_blank" class="proj-link">github.com/DawgyBey/WeatherBot
-        ↗</a>
-      <div class="proj-tags">
-        <span class="proj-tag">JavaScript</span>
-        <span class="proj-tag">REST API</span>
-        <span class="proj-tag">JSON</span>
-        <span class="proj-tag">Fetch API</span>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="proj-header">
-        <div class="proj-left">
-          <span class="proj-name">RoastBot</span>
-        </div>
-        <span class="proj-lang">Python</span>
-      </div>
-      <p class="proj-desc">An interactive Python-based bot designed to generate personalized, humorous 'roasts'.
-        Explores string manipulation, user input handling, and basic NLP concepts.</p>
-      <a href="https://github.com/DawgyBey/RoastBot" target="_blank" class="proj-link">github.com/DawgyBey/RoastBot
-        ↗</a>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span>
-        <span class="proj-tag">Scripting</span>
-        <span class="proj-tag">CLI</span>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="proj-header">
-        <div class="proj-left">
-          <span class="proj-name">VVM</span>
-        </div>
-        <span class="proj-lang">HTML · CSS</span>
-      </div>
-      <p class="proj-desc">A multi-page school website featuring admissions and academic portals. Built to master
-        navigation architecture, semantic structure, and responsive layout fundamentals.</p>
-      <a href="https://github.com/DawgyBey/VVM" target="_blank" class="proj-link">github.com/DawgyBey/VVM ↗</a>
-      <div class="proj-tags">
-        <span class="proj-tag">HTML5</span>
-        <span class="proj-tag">CSS3</span>
-        <span class="proj-tag">Flexbox</span>
-        <span class="proj-tag">Responsive Design</span>
-      </div>
-    </div>
-
-    <!-- RESEARCH -->
-    <div class="section" id="research">
-      <h2>Research & Papers</h2>
-
-      <div class="paper-card">
-        <div class="paper-info">
-          <div class="paper-header">
-            <span class="paper-type">Research Paper</span>
-            <span class="paper-date">2024</span>
+        <div class="stat-row" id="about-stats">
+          <div>
+            <div class="stat-num">4</div>
+            <div class="stat-label">Years learning</div>
           </div>
-          <h3 class="paper-title">Optimizing High-Altitude Logistics through AI-Driven Predictive Modeling</h3>
-          <p class="paper-abstract">An exploration into how machine learning can revolutionize trekking logistics in the
-            Himalayas, predicting weather patterns and resource requirements for safer expeditions.</p>
-          <div class="paper-actions">
-            <button class="read-btn" onclick="openReader('assets/research-paper.pdf')">Read Paper</button>
-            <a href="assets/GuardNet Final Research Paper.pdf" download class="download-link">Download PDF</a>
+          <div>
+            <div class="stat-num">12</div>
+            <div class="stat-label">Projects built</div>
+          </div>
+          <div>
+            <div class="stat-num">500+</div>
+            <div class="stat-label">GitHub commits</div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- STACK -->
-    <div class="section" id="stack">
-      <h2>Tech Stack</h2>
-      <div class="stack-tags">
-        <span class="stack-tag hi">JavaScript</span>
-        <span class="stack-tag hi">Python</span>
-        <span class="stack-tag hi">React</span>
-        <span class="stack-tag hi">Node.js</span>
-        <span class="stack-tag">Express</span>
-        <span class="stack-tag">HTML</span>
-        <span class="stack-tag">CSS</span>
-        <span class="stack-tag">Google OAuth</span>
-        <span class="stack-tag">REST APIs</span>
-        <span class="stack-tag">Git</span>
-        <span class="stack-tag">npm</span>
-        <span class="stack-tag">AI APIs</span>
-        <span class="stack-tag">JSON / MongoDB</span>
+  <section class="section" id="timeline">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Skills, over time</h2>
+        <p class="eyebrow">02 — 2022 to present</p>
+      </div>
+      <div class="timeline">
+        <div class="t-rail" id="timeline-list">
+          <p class="eyebrow">Loading timeline…</p>
+        </div>
+        <button class="add-btn" id="add-timeline" type="button" style="margin-top:20px;">+ Add timeline entry</button>
       </div>
     </div>
+  </section>
 
-    <!-- ABOUT -->
-    <div class="section" id="about">
-      <h2>About</h2>
-      <p class="about-text">I'm Sulav Nepal, a developer and professional based in Nepal. While my passion lies in
-        building software — from AI-driven applications to automation bots — I also serve as the
-        <strong>Manager</strong> at <a href="https://www.eternalhimalaya.com" target="_blank">Eternal Himalaya Adventure
-          Treks</a>, where I oversee operations and digital presence for high-altitude trekking experiences.
-      </p>
-      <p class="about-text">I bridge the gap between technical development and business management, constantly refining
-        my skills in React, Node.js, and Python while ensuring top-tier service delivery in the Himalayan adventure
-        industry.</p>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="section" id="contact">
-      <h2>Contact</h2>
-      <p class="about-text">Let's connect. Whether it's about a project, a collaboration, or a trek in the Himalayas.
-      </p>
-      <div class="hero-links">
-        <a href="mailto:sulavnepal2006@gmail.com">email</a>
-        <a href="tel:+9779841513754">phone</a>
-        <a href="https://www.instagram.com/ig_sul.av/" target="_blank">instagram</a>
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <p class="eyebrow">03 — Case files</p>
+      </div>
+      <div class="card-grid" id="projects-list">
+        <p class="eyebrow" style="padding:24px;">Loading work…</p>
       </div>
     </div>
+  </section>
 
-    <!-- ENQUIRE NOW -->
-    <div class="section" id="enquire">
-      <div class="enquire-section">
-        <div class="enquire-title">Have a project in mind?</div>
-        <div class="enquire-text">I'm always open to discussing new projects, creative ideas, or opportunities to be
-          part of your visions.</div>
-        <a href="mailto:sulavnepal2006@gmail.com?subject=Enquiry from Portfolio" class="enquire-btn">Enquire Now</a>
+  <section class="section" id="papers">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Papers &amp; writing</h2>
+        <p class="eyebrow">04 — Published</p>
+      </div>
+      <div class="card-grid" id="papers-list">
+        <p class="eyebrow" style="padding:24px;">Loading papers…</p>
       </div>
     </div>
+  </section>
 
-    <footer>
-      <span><span class="footer-line"></span>Sulav Nepal · 2026</span>
-      <span>Nepal 🇳🇵</span>
-    </footer>
-
-    <!-- READER OVERLAY -->
-    <div id="reader-overlay" class="reader-overlay">
-      <div class="reader-header">
-        <span class="reader-title">Reading Mode</span>
-        <button class="close-reader" onclick="closeReader()">&times;</button>
+  <section class="section" id="github" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Open source</h2>
+        <p class="eyebrow">05 — Github</p>
       </div>
-      <div class="reader-container">
-        <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+      <div class="github-controls">
+        <button id="github-sync-btn" class="sync-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+          </svg>
+          Sync repositories
+        </button>
+        <span id="github-sync-status" class="sync-status"></span>
+      </div>
+      <div class="card-grid" id="github-list">
+        <p class="eyebrow" style="padding:24px;">Loading github…</p>
       </div>
     </div>
+  </section>
 
-    <script src="reader.js"></script>
+  <section class="section" id="hire" style="border-top:1px solid var(--hair);border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Work with me</h2>
+        <p class="eyebrow">06 — Collaboration</p>
+      </div>
+      <div class="availability"><span class="pulse"></span>Open to internships &amp; junior developer roles</div>
+      <div class="offer-grid">
+        <div class="offer-card">
+          <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M6 17a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.6A4.5 4.5 0 0 1 18 17H6z" />
+          </svg>
+          <h3>Web Development</h3>
+          <p>Building clean, responsive front-end websites using HTML, CSS, and modern JavaScript.</p>
+        </div>
+        <div class="offer-card">
+          <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3.5 2" />
+          </svg>
+          <h3>Python Scripting</h3>
+          <p>Writing scripts to automate simple tasks, parse data files, and perform basic data analysis.</p>
+        </div>
+        <div class="offer-card">
+          <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" />
+          </svg>
+          <h3>Collaborative Projects</h3>
+          <p>Eager to join team hackathons, contribute to open source, or work on group software projects.</p>
+        </div>
+      </div>
+      <a class="cta-btn" id="cta-email-btn" href="mailto:sulavinjob@gmail.com?subject=Collaborating%20together">Start a conversation
+        &#8594;</a>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow" style="color:#9a988f;">07 — Get in touch</p>
+      <h2>Let's build<br>something together.</h2>
+      <div class="contact-row" id="contact-links">
+        <a href="mailto:sulavinjob@gmail.com">sulavinjob@gmail.com</a>
+        <a href="https://www.linkedin.com/in/sulav-nepal/" target="_blank">LinkedIn</a>
+        <a href="https://x.com/Dawgybey" target="_blank">Twitter / X</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div id="footer-profile-name"><span class="dot"></span>Sulav Nepal — Student &amp; Aspiring Developer</div>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <button id="cms-open" type="button"
+        style="background:none;border:none;color:var(--smoke);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;text-decoration:underline;cursor:pointer;padding:0;display:none;">Manage
+        content</button>
+      <span>&copy; 2026</span>
+    </div>
+  </footer>
+
+  <div id="cms-backdrop"></div>
+  <aside id="cms-panel">
+    <div class="cms-panel-head">
+      <h3>Content panel</h3>
+      <button id="cms-close" type="button" aria-label="Close panel">&times;</button>
+    </div>
+    <button id="panel-edit-toggle" class="panel-action" type="button">Turn on inline editing</button>
+    <p class="cms-panel-hint">Add a blank entry to any section below, then edit its text directly on the page.</p>
+    <p class="cms-section-label">Add</p>
+    <button class="panel-action" type="button" data-add="timeline">+ Timeline entry</button>
+    <button class="panel-action" type="button" data-add="projects">+ Project</button>
+    <button class="panel-action" type="button" data-add="papers">+ Paper</button>
+    <button class="panel-action" type="button" data-add="github">+ Github repo</button>
+    <div class="cms-panel-footer">
+      <button id="panel-reset-btn" type="button">Reset all content to defaults</button>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+
 </body>
 
 </html>
