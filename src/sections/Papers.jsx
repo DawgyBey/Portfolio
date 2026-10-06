@@ -21,26 +21,26 @@ export default function Papers() {
                   PAPER_001
                 </span>
                 <div className="font-display mt-3 text-6xl font-black tracking-tight text-white/15 md:text-8xl">
-                  ’24
+                  ’26
                 </div>
               </div>
 
               <div className="md:col-span-8">
                 <h3 className="font-display max-w-2xl text-2xl font-black uppercase leading-tight tracking-tight md:text-4xl">
-                  <MaskLine>Optimizing High-Altitude Logistics through</MaskLine>
+                  <MaskLine>Agentic Fraud Detection Framework</MaskLine>
                   <MaskLine delay={100}>
-                    <span className="outline-text-dark">AI-Driven Predictive Modeling</span>
+                    <span className="outline-text-dark">for Digital Payments</span>
                   </MaskLine>
                 </h3>
                 <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/60 md:text-base">
-                  An exploration into how machine learning can revolutionize trekking logistics in
-                  the Himalayas, predicting weather patterns and resource requirements for safer
-                  expeditions.
+                  A multi-agent framework for detecting fraud in Nepal&apos;s digital payments. It
+                  combines velocity, geolocation, behavioral, and graph signals to assess
+                  transactions and recommend an approve, OTP, or block decision.
                 </p>
                 <div className="font-mono2 mt-6 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em] text-white/50">
                   <span className="border border-white/20 px-3 py-1.5">Research Paper</span>
-                  <span className="border border-white/20 px-3 py-1.5">Predictive Modeling</span>
-                  <span className="border border-white/20 px-3 py-1.5">2024</span>
+                  <span className="border border-white/20 px-3 py-1.5">Multi-Agent Systems</span>
+                  <span className="border border-white/20 px-3 py-1.5">Fraud Detection · 2026</span>
                 </div>
               </div>
 
