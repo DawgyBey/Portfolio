@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sulav Nepal — Portfolio Admin Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: var(--paper-2);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-wrap {
+      max-width: 960px;
+      margin: 80px auto;
+      padding: 0 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .login-box {
+      max-width: 400px;
+      margin: 120px auto;
+      padding: 40px;
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .login-box h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 22px;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--smoke);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--hair);
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      background: var(--paper-2);
+      color: var(--ink);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--ink);
+    }
+
+    .admin-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--white);
+      border: 1px solid var(--ink);
+      padding: 12px 24px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all .2s ease;
+      width: 100%;
+    }
+
+    .admin-btn:hover {
+      background: none;
+      color: var(--ink);
+    }
+
+    .admin-btn.secondary {
+      background: none;
+      color: var(--ink);
+      border-color: var(--hair);
+    }
+
+    .admin-btn.secondary:hover {
+      border-color: var(--ink);
+    }
+
+    .admin-btn.danger {
+      background: var(--signal);
+      border-color: var(--signal);
+      color: var(--white);
+    }
+
+    .admin-btn.danger:hover {
+      background: none;
+      color: var(--signal);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 20px;
+    }
+
+    .dashboard-header h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .admin-section {
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: 4px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .admin-section h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .editor-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .editor-item {
+      border: 1px solid var(--hair);
+      border-radius: 2px;
+      padding: 20px;
+      background: var(--paper-2);
+      position: relative;
+    }
+
+    .editor-item .del-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--smoke);
+      transition: color .2s ease;
+    }
+
+    .editor-item .del-btn:hover {
+      color: var(--signal);
+    }
+
+    .editor-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .editor-form-grid .full-width {
+      grid-column: span 2;
+    }
+
+    .raw-textarea {
+      width: 100%;
+      height: 450px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      padding: 16px;
+      background: var(--paper-2);
+      border: 1px solid var(--hair);
+      border-radius: 2px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .raw-textarea:focus {
+      outline: none;
+      border-color: var(--ink);
+    }
+
+    .err-msg {
+      color: var(--signal);
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .save-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--hair);
+      padding: 20px;
+      z-index: 100;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .save-bar-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .save-status {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--smoke);
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--hair);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tab-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      padding: 12px 24px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--smoke);
+      border-bottom: 2px solid transparent;
+      transition: all .2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tab-btn.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+      font-weight: 500;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: var(--ink);
+      color: var(--white);
+      padding: 14px 24px;
+      border-radius: 2px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nested-list-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Login Gate -->
+  <div id="login-gate" class="login-box">
+    <h2>Admin Access</h2>
+    <form id="login-form">
+      <div class="input-group">
+        <label for="passcode">Passcode</label>
+        <input type="password" id="passcode" class="form-control" placeholder="••••••••" required autofocus autocomplete="current-password">
+      </div>
+      <button type="submit" class="admin-btn">Unlock Console</button>
+      <p id="login-error" class="err-msg">Incorrect passcode. Please try again.</p>
+    </form>
+  </div>
+
+  <!-- Admin Panel Content (hidden by default) -->
+  <div id="admin-panel" class="admin-wrap" style="display: none;">
+    <div class="dashboard-header">
+      <div>
+        <h1>Portfolio Admin</h1>
+        <p class="eyebrow" style="margin-top: 4px;">Dynamic Content Management Console</p>
+      </div>
+      <button id="logout-btn" class="admin-btn secondary" style="width: auto; padding: 8px 16px;">Logout</button>
+    </div>
+
+    <div class="quick-links">
+      <a href="index.html" class="admin-btn secondary" style="text-decoration: none; text-align: center;">View Live Site</a>
+      <a href="index.html?edit=true" class="admin-btn" style="text-decoration: none; text-align: center;">Open Live Page Editor</a>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('profile')">Profile &amp; About</button>
+      <button class="tab-btn" onclick="switchTab('contact')">Contact &amp; Socials</button>
+      <button class="tab-btn" onclick="switchTab('lists')">Portfolio Lists</button>
+      <button class="tab-btn" onclick="switchTab('raw')">Raw JSON Schema</button>
+    </div>
+
+    <!-- Tab 1: Profile & About -->
+    <div id="tab-profile" class="tab-content active">
+      <div class="admin-section">
+        <h2>Identity Settings</h2>
+        <div class="editor-form-grid">
+          <div class="input-group">
+            <label>First Name</label>
+            <input type="text" id="prof-firstname" class="form-control" oninput="updateProfileField('firstName', this.value)">
+          </div>
+          <div class="input-group">
+            <label>Last Name</label>
+            <input type="text" id="prof-lastname" class="form-control" oninput="updateProfileField('lastName', this.value)">
+          </div>
+          <div class="input-group">
+            <label>Header Monogram</label>
+            <input type="text" id="prof-monogram" class="form-control" oninput="updateProfileField('monogram', this.value)">
+          </div>
+          <div class="input-group">
+            <label>Hero Vertical Masthead Text</label>
+            <input type="text" id="prof-vert" class="form-control" oninput="updateProfileField('verticalText', this.value)">
+          </div>
+          <div class="input-group full-width">
+            <label>Subtitle / Professional Role</label>
+            <input type="text" id="prof-role" class="form-control" oninput="updateProfileField('role', this.value)">
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>About Section Copy</h2>
+        <div class="editor-form-grid">
+          <div class="input-group full-width">
+            <label>About Lede Paragraph (Supports HTML tags)</label>
+            <textarea id="about-lede" class="form-control" rows="3" oninput="updateAboutField('lede', this.value)"></textarea>
+          </div>
+          <div class="input-group full-width">
+            <label style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Bio Paragraphs</span>
+              <button class="admin-btn secondary" style="width:auto; padding:4px 8px; font-size:9px;" onclick="addBioParagraph()">+ Add Paragraph</button>
+            </label>
+            <div id="bio-paragraphs-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Statistics Dashboard</h2>
+        <p class="cms-panel-hint" style="margin-bottom: 16px; color: var(--smoke);">Configure the numbers and achievements displayed in the About section.</p>
+        <div id="stats-container"></div>
+        <button class="admin-btn secondary" style="margin-top: 12px;" onclick="addStat()">+ Add Statistic</button>
+      </div>
+    </div>
+
+    <!-- Tab 2: Contact & Socials -->
+    <div id="tab-contact" class="tab-content">
+      <div class="admin-section">
+        <h2>Contact Details &amp; Profiles</h2>
+        <div class="editor-form-grid">
+          <div class="input-group">
+            <label>Primary Contact Email</label>
+            <input type="email" id="contact-email" class="form-control" oninput="updateContactField('email', this.value)">
+          </div>
+          <div class="input-group">
+            <label>GitHub Username (for syncing repos)</label>
+            <input type="text" id="contact-github" class="form-control" oninput="updateContactField('githubUser', this.value)">
+          </div>
+          <div class="input-group full-width">
+            <label>LinkedIn Profile Link</label>
+            <input type="url" id="contact-linkedin" class="form-control" oninput="updateContactField('linkedin', this.value)">
+          </div>
+          <div class="input-group full-width">
+            <label>Twitter / X Profile Link</label>
+            <input type="url" id="contact-twitter" class="form-control" oninput="updateContactField('twitter', this.value)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Portfolio Lists -->
+    <div id="tab-lists" class="tab-content">
+      <!-- TIMELINE -->
+      <section class="admin-section">
+        <h2>
+          <span>Timeline Entries</span>
+          <button class="admin-btn secondary" style="width: auto; padding: 6px 12px; font-size: 10px;" onclick="addItem('timeline')">+ Add Year</button>
+        </h2>
+        <div id="timeline-editor" class="editor-grid"></div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="admin-section">
+        <h2>
+          <span>Curated Projects (Selected Work)</span>
+          <button class="admin-btn secondary" style="width: auto; padding: 6px 12px; font-size: 10px;" onclick="addItem('projects')">+ Add Project</button>
+        </h2>
+        <div id="projects-editor" class="editor-grid"></div>
+      </section>
+
+      <!-- PAPERS -->
+      <section class="admin-section">
+        <h2>
+          <span>Papers &amp; Writing</span>
+          <button class="admin-btn secondary" style="width: auto; padding: 6px 12px; font-size: 10px;" onclick="addItem('papers')">+ Add Paper</button>
+        </h2>
+        <div id="papers-editor" class="editor-grid"></div>
+      </section>
+
+      <!-- GITHUB -->
+      <section class="admin-section">
+        <h2>
+          <span>GitHub Repos (Open source default list)</span>
+          <button class="admin-btn secondary" style="width: auto; padding: 6px 12px; font-size: 10px;" onclick="addItem('github')">+ Add Repo</button>
+        </h2>
+        <div id="github-editor" class="editor-grid"></div>
+      </section>
+    </div>
+
+    <!-- Tab 4: Raw JSON Schema -->
+    <div id="tab-raw" class="tab-content">
+      <div class="admin-section">
+        <h2>Raw Data JSON</h2>
+        <p class="cms-panel-hint" style="margin-bottom: 16px; color: var(--smoke);">You can directly edit the backend configuration JSON schema here. Click "Format" to validate syntax.</p>
+        <textarea id="json-textarea" class="raw-textarea" spellcheck="false"></textarea>
+        <div style="display: flex; gap: 12px; margin-top: 16px;">
+          <button class="admin-btn secondary" style="width: auto;" onclick="formatJson()">Format JSON</button>
+          <button class="admin-btn" style="width: auto;" onclick="applyRawJson()">Apply JSON Schema</button>
+        </div>
+        <p id="json-error" class="err-msg"></p>
+      </div>
+    </div>
+
+    <div style="height: 120px;"></div> <!-- Spacing for fixed bar -->
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div id="save-bar" class="save-bar" style="display: none;">
+    <div class="save-bar-inner">
+      <span id="save-status" class="save-status">Unsaved changes detected.</span>
+      <div class="actions-row">
+        <button class="admin-btn secondary" style="width: auto;" onclick="resetToDefaults()">Reset to Defaults</button>
+        <button class="admin-btn" style="width: auto;" onclick="saveAllChanges()">Save All Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Changes saved successfully</div>
+
+  <!-- Core Script -->
+  <script>
+    const STORAGE_KEY = 'portfolio-data-v6';
+    const CORRECT_PASSCODE = 'sulav2026';
+
+    // Polyfill local storage for standard web hosts
+    if (!window.storage) {
+      window.storage = {
+        get: function (key) {
+          return Promise.resolve({ value: localStorage.getItem(key) });
+        },
+        set: function (key, value) {
+          localStorage.setItem(key, value);
+          return Promise.resolve();
+        }
+      };
+    }
+
+    const DEFAULT_DATA = {
+      profile: {
+        firstName: 'Sulav',
+        lastName: 'Nepal',
+        monogram: 'SN',
+        role: 'Student & Aspiring Software Developer (Class of 2026)',
+        verticalText: 'The Builders — Class Of 2026'
+      },
+      about: {
+        lede: 'Aspiring <span class="signal-text">software developer</span> focused on building clean web applications and learning data science.',
+        bio: [
+          'I am a passionate computer science student who started coding with basic programming concepts and quickly fell in love with software development. I enjoy building functional websites and exploring data analysis libraries.',
+          'Currently pursuing my degree, I am focused on mastering core software engineering practices, learning Python, and collaborating on academic and open-source projects to solve real-world problems.'
+        ],
+        stats: [
+          { num: '4', label: 'Years learning' },
+          { num: '12', label: 'Projects built' },
+          { num: '500+', label: 'GitHub commits' }
+        ]
+      },
+      contact: {
+        email: 'sulavinjob@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/sulav-nepal/',
+        twitter: 'https://x.com/Dawgybey',
+        githubUser: 'DawgyBey'
+      },
+      timeline: [
+        { year: '2022', title: 'Intro to C programming', desc: 'Learned fundamental concepts like variables, loops, conditional logic, and memory allocation.', icon: 'code' },
+        { year: '2023', title: 'HTML, CSS, JS', desc: 'Started building dynamic web pages, learning about DOM manipulation, responsive layouts, and CSS styling.', icon: 'web' },
+        { year: '2024', title: 'Python Basic', desc: 'Learned Python programming, writing automation scripts, sorting algorithms, and working with CLI apps.', icon: 'network' },
+        { year: '2025', title: 'UI/UX Design', desc: 'Discovered wireframing, layout hierarchy, and user-centric design principles in Figma.', icon: 'star' },
+        { year: '2026', title: 'Pandas, Numpy model training', desc: 'Exploring data science, training basic regression models, and data visualization.', icon: 'brain' }
+      ],
+      projects: [
+        { title: 'Lumina', desc: 'A seamless fusion of computer vision and architectural glass. Designed to empower the modern campus with Invisible Intelligence.', tag: 'Academic Project · 2026', link: 'https://github.com/sunwaycollege-research/lumina_smart_mirror' },
+        { title: 'Incanto', desc: 'An AI-powered gift and product finder that helps users discover personalized recommendations using intelligent matching and real-time e-commerce data.', tag: 'Personal Project · 2026', link: 'https://github.com/DawgyBey/Incanto' }
+      ],
+      papers: [
+        { title: 'Optimizing High-Altitude Logistics through AI-Driven Predictive Modeling', desc: 'An exploration into how machine learning can revolutionize trekking logistics in the Himalayas, predicting weather patterns and resource requirements for safer expeditions.', tag: 'Research Paper · 2024', link: 'assets/GuardNet Final Research Paper.pdf' }
+      ],
+      github: [
+        { title: 'sorting-visualizer', desc: 'Visual animation of basic sorting algorithms built with Javascript and HTML5 canvas.', tag: 'MIT license', link: '' },
+        { title: 'task-tracker-cli', desc: 'Python command line application for tracking tasks and to-do lists.', tag: 'Apache 2.0', link: '' },
+        { title: 'housing-predictor', desc: 'Python Jupyter Notebook containing the NumPy/Pandas analysis of real estate datasets.', tag: 'MIT license', link: '' }
+      ]
+    };
+
+    let state = {};
+    let hasChanges = false;
+
+    // Login logic
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const code = document.getElementById('passcode').value.trim();
+      if (code === CORRECT_PASSCODE) {
+        sessionStorage.setItem('portfolio-admin-auth', 'true');
+        showAdminPanel();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', function() {
+      sessionStorage.setItem('portfolio-admin-auth', 'false');
+      window.location.reload();
+    });
+
+    // Check Auth Status on load
+    window.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('portfolio-admin-auth') === 'true') {
+        showAdminPanel();
+      }
+    });
+
+    function showAdminPanel() {
+      document.getElementById('login-gate').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+      document.getElementById('save-bar').style.display = 'block';
+      loadStateAndInit();
+    }
+
+    async function loadStateAndInit() {
+      try {
+        const res = await window.storage.get(STORAGE_KEY, false);
+        if (res && res.value) {
+          state = JSON.parse(res.value);
+        } else {
+          state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+        }
+      } catch (e) {
+        state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+      }
+      
+      // Ensure section objects are initialized correctly in case we load older key versions
+      if (!state.profile) state.profile = JSON.parse(JSON.stringify(DEFAULT_DATA.profile));
+      if (!state.about) state.about = JSON.parse(JSON.stringify(DEFAULT_DATA.about));
+      if (!state.contact) state.contact = JSON.parse(JSON.stringify(DEFAULT_DATA.contact));
+
+      // Populate static inputs
+      document.getElementById('prof-firstname').value = state.profile.firstName || '';
+      document.getElementById('prof-lastname').value = state.profile.lastName || '';
+      document.getElementById('prof-monogram').value = state.profile.monogram || '';
+      document.getElementById('prof-vert').value = state.profile.verticalText || '';
+      document.getElementById('prof-role').value = state.profile.role || '';
+      
+      document.getElementById('about-lede').value = state.about.lede || '';
+      
+      document.getElementById('contact-email').value = state.contact.email || '';
+      document.getElementById('contact-github').value = state.contact.githubUser || '';
+      document.getElementById('contact-linkedin').value = state.contact.linkedin || '';
+      document.getElementById('contact-twitter').value = state.contact.twitter || '';
+
+      renderEditor();
+    }
+
+    // Dynamic field update handlers
+    function updateProfileField(field, value) {
+      state.profile[field] = value;
+      markChanged();
+    }
+
+    function updateAboutField(field, value) {
+      state.about[field] = value;
+      markChanged();
+    }
+
+    function updateContactField(field, value) {
+      state.contact[field] = value;
+      markChanged();
+    }
+
+    // Bio management
+    function renderBioParagraphs() {
+      const container = document.getElementById('bio-paragraphs-container');
+      container.innerHTML = state.about.bio.map((para, index) => `
+        <div class="nested-list-item">
+          <textarea class="form-control" rows="2" oninput="updateBioParagraph(${index}, this.value)">${esc(para)}</textarea>
+          <button class="admin-btn danger" style="width: auto; padding: 12px;" onclick="removeBioParagraph(${index})">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function updateBioParagraph(index, value) {
+      state.about.bio[index] = value;
+      markChanged();
+    }
+
+    function addBioParagraph() {
+      state.about.bio.push('New bio paragraph details...');
+      markChanged();
+      renderBioParagraphs();
+    }
+
+    function removeBioParagraph(index) {
+      if (state.about.bio.length <= 1) {
+        alert('You should have at least one biography paragraph.');
+        return;
+      }
+      state.about.bio.splice(index, 1);
+      markChanged();
+      renderBioParagraphs();
+    }
+
+    // Stats management
+    function renderStats() {
+      const container = document.getElementById('stats-container');
+      container.innerHTML = state.about.stats.map((s, index) => `
+        <div class="nested-list-item" style="background: var(--paper-2); padding: 12px; border: 1px solid var(--hair); border-radius: 2px;">
+          <div style="display: flex; gap: 12px; width: 100%;">
+            <div style="width: 30%;">
+              <label style="font-size: 9px; text-transform: uppercase; color: var(--smoke); display: block; margin-bottom: 4px;">Metric Value</label>
+              <input type="text" class="form-control" value="${esc(s.num)}" oninput="updateStatField(${index}, 'num', this.value)">
+            </div>
+            <div style="width: 70%;">
+              <label style="font-size: 9px; text-transform: uppercase; color: var(--smoke); display: block; margin-bottom: 4px;">Description Label</label>
+              <input type="text" class="form-control" value="${esc(s.label)}" oninput="updateStatField(${index}, 'label', this.value)">
+            </div>
+          </div>
+          <button class="admin-btn danger" style="width: auto; padding: 12px; margin-top: 16px;" onclick="removeStat(${index})">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function updateStatField(index, field, value) {
+      state.about.stats[index][field] = value;
+      markChanged();
+    }
+
+    function addStat() {
+      state.about.stats.push({ num: '0', label: 'New Metric' });
+      markChanged();
+      renderStats();
+    }
+
+    function removeStat(index) {
+      state.about.stats.splice(index, 1);
+      markChanged();
+      renderStats();
+    }
+
+    function renderEditor() {
+      renderBioParagraphs();
+      renderStats();
+
+      // Timeline
+      renderSection('timeline', (item, index) => `
+        <div class="editor-item">
+          <button class="del-btn" onclick="removeItem('timeline', ${index})">&times;</button>
+          <div class="editor-form-grid">
+            <div class="input-group">
+              <label>Year</label>
+              <input type="text" class="form-control" value="${esc(item.year)}" oninput="updateItemField('timeline', ${index}, 'year', this.value)">
+            </div>
+            <div class="input-group">
+              <label>Icon</label>
+              <select class="form-control" onchange="updateItemField('timeline', ${index}, 'icon', this.value)">
+                ${['code', 'web', 'network', 'brain', 'chip', 'grid', 'cloud', 'signal', 'star', 'clock', 'folder', 'doc', 'branch']
+                  .map(key => `<option value="${key}" ${key === item.icon ? 'selected' : ''}>${key}</option>`).join('')}
+              </select>
+            </div>
+            <div class="input-group full-width">
+              <label>Title</label>
+              <input type="text" class="form-control" value="${esc(item.title)}" oninput="updateItemField('timeline', ${index}, 'title', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Description</label>
+              <textarea class="form-control" rows="2" oninput="updateItemField('timeline', ${index}, 'desc', this.value)">${esc(item.desc)}</textarea>
+            </div>
+          </div>
+        </div>
+      `);
+
+      // Projects
+      renderSection('projects', (item, index) => `
+        <div class="editor-item">
+          <button class="del-btn" onclick="removeItem('projects', ${index})">&times;</button>
+          <div class="editor-form-grid">
+            <div class="input-group">
+              <label>Title</label>
+              <input type="text" class="form-control" value="${esc(item.title)}" oninput="updateItemField('projects', ${index}, 'title', this.value)">
+            </div>
+            <div class="input-group">
+              <label>Tag / Date</label>
+              <input type="text" class="form-control" value="${esc(item.tag)}" oninput="updateItemField('projects', ${index}, 'tag', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Link URL</label>
+              <input type="url" class="form-control" value="${esc(item.link)}" oninput="updateItemField('projects', ${index}, 'link', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Description</label>
+              <textarea class="form-control" rows="2" oninput="updateItemField('projects', ${index}, 'desc', this.value)">${esc(item.desc)}</textarea>
+            </div>
+          </div>
+        </div>
+      `);
+
+      // Papers
+      renderSection('papers', (item, index) => `
+        <div class="editor-item">
+          <button class="del-btn" onclick="removeItem('papers', ${index})">&times;</button>
+          <div class="editor-form-grid">
+            <div class="input-group">
+              <label>Title</label>
+              <input type="text" class="form-control" value="${esc(item.title)}" oninput="updateItemField('papers', ${index}, 'title', this.value)">
+            </div>
+            <div class="input-group">
+              <label>Tag / Date</label>
+              <input type="text" class="form-control" value="${esc(item.tag)}" oninput="updateItemField('papers', ${index}, 'tag', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Link URL / Path</label>
+              <input type="text" class="form-control" value="${esc(item.link)}" oninput="updateItemField('papers', ${index}, 'link', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Description / Abstract</label>
+              <textarea class="form-control" rows="3" oninput="updateItemField('papers', ${index}, 'desc', this.value)">${esc(item.desc)}</textarea>
+            </div>
+          </div>
+        </div>
+      `);
+
+      // GitHub
+      renderSection('github', (item, index) => `
+        <div class="editor-item">
+          <button class="del-btn" onclick="removeItem('github', ${index})">&times;</button>
+          <div class="editor-form-grid">
+            <div class="input-group">
+              <label>Repo Name</label>
+              <input type="text" class="form-control" value="${esc(item.title)}" oninput="updateItemField('github', ${index}, 'title', this.value)">
+            </div>
+            <div class="input-group">
+              <label>Tag (License / Language)</label>
+              <input type="text" class="form-control" value="${esc(item.tag)}" oninput="updateItemField('github', ${index}, 'tag', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Link URL</label>
+              <input type="url" class="form-control" value="${esc(item.link)}" oninput="updateItemField('github', ${index}, 'link', this.value)">
+            </div>
+            <div class="input-group full-width">
+              <label>Description</label>
+              <textarea class="form-control" rows="2" oninput="updateItemField('github', ${index}, 'desc', this.value)">${esc(item.desc)}</textarea>
+            </div>
+          </div>
+        </div>
+      `);
+
+      // Update RAW tab content
+      document.getElementById('json-textarea').value = JSON.stringify(state, null, 2);
+    }
+
+    function renderSection(section, templateFn) {
+      const container = document.getElementById(`${section}-editor`);
+      if (!state[section] || state[section].length === 0) {
+        container.innerHTML = `<p style="padding: 12px; color: var(--smoke); font-size: 13px;">No entries available.</p>`;
+        return;
+      }
+      container.innerHTML = state[section].map((item, index) => templateFn(item, index)).join('');
+    }
+
+    function updateItemField(section, index, field, value) {
+      state[section][index][field] = value;
+      markChanged();
+    }
+
+    function addItem(section) {
+      if (section === 'timeline') {
+        state.timeline.push({ year: '2026', title: 'New Skill', desc: 'Describe this timeline milestone.', icon: 'star' });
+      } else if (section === 'projects' || section === 'papers' || section === 'github') {
+        state[section].push({ title: 'New Entry', desc: 'Describe the details of this item.', tag: 'Tag or Year', link: '' });
+      }
+      markChanged();
+      renderEditor();
+    }
+
+    function removeItem(section, index) {
+      if (!confirm(`Are you sure you want to remove item #${index + 1}?`)) return;
+      state[section].splice(index, 1);
+      markChanged();
+      renderEditor();
+    }
+
+    function markChanged() {
+      hasChanges = true;
+      document.getElementById('save-status').textContent = 'Unsaved changes detected. Click "Save All Changes" to sync to the live website.';
+      document.getElementById('save-status').style.color = 'var(--signal)';
+    }
+
+    function clearChanged() {
+      hasChanges = false;
+      document.getElementById('save-status').textContent = 'All changes saved and active on live site.';
+      document.getElementById('save-status').style.color = 'green';
+    }
+
+    async function saveAllChanges() {
+      try {
+        await window.storage.set(STORAGE_KEY, JSON.stringify(state), false);
+        clearChanged();
+        showToast('Changes saved successfully');
+      } catch (e) {
+        alert('Failed to save data. Try again.');
+      }
+    }
+
+    function resetToDefaults() {
+      if (!confirm('Are you sure you want to reset all portfolio content to default values? This will overwrite your changes.')) return;
+      state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+      
+      // Update form values
+      document.getElementById('prof-firstname').value = state.profile.firstName || '';
+      document.getElementById('prof-lastname').value = state.profile.lastName || '';
+      document.getElementById('prof-monogram').value = state.profile.monogram || '';
+      document.getElementById('prof-vert').value = state.profile.verticalText || '';
+      document.getElementById('prof-role').value = state.profile.role || '';
+      document.getElementById('about-lede').value = state.about.lede || '';
+      document.getElementById('contact-email').value = state.contact.email || '';
+      document.getElementById('contact-github').value = state.contact.githubUser || '';
+      document.getElementById('contact-linkedin').value = state.contact.linkedin || '';
+      document.getElementById('contact-twitter').value = state.contact.twitter || '';
+
+      markChanged();
+      renderEditor();
+    }
+
+    // Tabs navigation
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      event.target.classList.add('active');
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+    }
+
+    // JSON Raw editing handlers
+    function formatJson() {
+      const el = document.getElementById('json-textarea');
+      const err = document.getElementById('json-error');
+      err.style.display = 'none';
+      try {
+        const val = JSON.parse(el.value);
+        el.value = JSON.stringify(val, null, 2);
+      } catch (e) {
+        err.textContent = `Syntax Error: ${e.message}`;
+        err.style.display = 'block';
+      }
+    }
+
+    function applyRawJson() {
+      const el = document.getElementById('json-textarea');
+      const err = document.getElementById('json-error');
+      err.style.display = 'none';
+      try {
+        const val = JSON.parse(el.value);
+        
+        // Validation
+        if (!val.profile || !val.about || !val.contact || !val.timeline || !val.projects || !val.papers || !val.github) {
+          throw new Error('Missing core JSON keys (profile, about, contact, timeline, projects, papers, or github)');
+        }
+
+        state = val;
+        
+        // Update input forms
+        document.getElementById('prof-firstname').value = state.profile.firstName || '';
+        document.getElementById('prof-lastname').value = state.profile.lastName || '';
+        document.getElementById('prof-monogram').value = state.profile.monogram || '';
+        document.getElementById('prof-vert').value = state.profile.verticalText || '';
+        document.getElementById('prof-role').value = state.profile.role || '';
+        document.getElementById('about-lede').value = state.about.lede || '';
+        document.getElementById('contact-email').value = state.contact.email || '';
+        document.getElementById('contact-github').value = state.contact.githubUser || '';
+        document.getElementById('contact-linkedin').value = state.contact.linkedin || '';
+        document.getElementById('contact-twitter').value = state.contact.twitter || '';
+
+        markChanged();
+        renderEditor();
+        showToast('JSON Schema Applied');
+        switchTab('profile');
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+      } catch (e) {
+        err.textContent = `Failed to apply schema: ${e.message}`;
+        err.style.display = 'block';
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    function esc(s) {
+      if (s == null) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+
+</html>
