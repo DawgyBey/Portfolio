@@ -4,7 +4,8 @@ import Nav from '../sections/Nav'
 import Hero from '../sections/Hero'
 import About from '../sections/About'
 import Timeline from '../sections/Timeline'
-import Work from '../sections/Work'
+import { lazy, Suspense } from 'react'
+const Work = lazy(() => import('../sections/SpiralWork'))
 import Papers from '../sections/Papers'
 import Github from '../sections/Github'
 import Hire from '../sections/Hire'
@@ -17,17 +18,6 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Marquee
-          items={[
-            'Machine Learning',
-            'Neural Networks',
-            'Python',
-            'Data Science',
-            'Clean Code',
-            'Open Source',
-            'Class of 2026',
-          ]}
-        />
         <About />
         <Timeline />
         <Marquee
@@ -42,7 +32,9 @@ export default function Home() {
             'FastAPI curious',
           ]}
         />
-        <Work />
+        <Suspense fallback={<section id="work" className="h-screen bg-[#0e0e0e]" />}>
+          <Work />
+        </Suspense>
         <Papers />
         <Github />
         <Marquee
